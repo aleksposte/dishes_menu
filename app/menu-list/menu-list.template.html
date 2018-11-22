@@ -1,0 +1,74 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col-md-2">
+      <p>
+        Search:
+      <input ng-model="$ctrl.query" />
+    </p>
+       <p>
+        Sort by:
+        <select ng-model="$ctrl.orderProp">
+          <option selected value="title">Имени</option>
+          <option value="rating">Рейтинг</option>
+          <option value="price">Цена</option>
+        </select>
+      </p>
+    </div>
+
+    <div class="col-md-12">
+      <div class="menu" >
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th scope="col">Название</th>
+              <th scope="col">Изображение</th>
+              <th scope="col">Рейтинг</th>
+              <th scope="col">Цена</th>
+              <th scope="col">Ингридиенты</th>
+              <!-- <th scope='col'>test link</th> -->
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr ng-repeat="menu in $ctrl.menus | filter:$ctrl.query | orderBy:$ctrl.orderProp">
+              <td>{{ menu.title }}</td>
+              <td><img src="{{ menu.image }}" alt=""></td>
+              <td>{{ menu.rating }}</td>
+              <td>{{ menu.price }}</td>
+              <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModal">Ингридиенты</button></td>
+              <!-- <td><a href="#!/menus/{{menu.id}}" data-toggle="modal" data-target="#exampleModal">{{menu.title}}</a></td> -->
+
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">ingredients</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <ul class="menu-thumbs">
+                       <li ng-repeat="ingredient in $ctrl.menu.ingredients">
+                         <img ng-src="{{ingredient}}" />
+                       </li>
+                     </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end Modal -->
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+     </div>
+
+  </div>
+
+</div>
+
